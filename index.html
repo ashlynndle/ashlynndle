@@ -1,0 +1,175 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  
+  
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  user-select: none;
+}
+#container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+#header {
+  font-family: Comic Sans MS;
+  font-size: 100px;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.box {
+    font-family: Comic Sans MS;
+
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  font-size: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+</style>
+
+  
+  
+  
+  
+
+</head>
+
+<body translate="no" >
+  <div id="container">
+  
+  
+  
+  
+  <div id="header">
+    ASHLYNNDLE
+  </div>
+  
+  
+  
+</div>
+  
+  
+      <script id="rendered-js" >
+window.onload = function() {
+  
+  
+  head = document.getElementById("header")
+  let ASHLYNN = ["a", "s", "h", "l", "y", "n", "n"]
+
+  let game_runnign = true;
+  
+    
+  let current_row = 0;
+  let r0array = [];
+  let r1array = [];
+  let r2array = [];
+  let r3array = [];
+  let r4array = [];
+  let r5array = [];
+  let rows = [r0array, r1array, r2array, r3array, r4array, r5array];
+  
+  function wordle(x) {
+    let win = true;
+    for(h = 0; h<ASHLYNN.length; h++) {
+      cbox = document.getElementById("row" + current_row + "column" + h)
+      if(ASHLYNN[h] === x[h]){
+        cbox.style.backgroundColor = "green";
+      }
+      else if(ASHLYNN.includes(x[h])) {
+        cbox.style.backgroundColor = "yellow";
+        win = false;
+      }
+      else {
+        cbox.style.backgroundColor = "gray";
+        win = false;
+      }
+    }
+    if(win == true) {
+      head.innerHTML = "HAPPY BIRTHDAY ASHLYNN!!!"
+    }
+  }
+  
+  
+  document.body.addEventListener('keydown', function (e) {
+    
+    
+    if(e.keyCode == 13 && rows[current_row].length == 7) {
+      if(current_row < 6) {
+        
+        wordle(rows[current_row]);
+        
+        
+        current_row++;
+
+      }
+    }
+    
+    if (e.keyCode == 8) {
+      rows[current_row].pop()
+    }    
+    
+    
+    if(rows[current_row].length <= 6) {
+     if (e.keyCode >= 65 && e.keyCode <= 90) {
+          rows[current_row].push(e.key.toLowerCase())
+          
+      } 
+      else if (e.keyCode >= 97 && e.keyCode <= 122) {
+            rows[current_row].push(e.key.toLowerCase())
+    }
+    }
+      
+    console.log(rows[current_row])
+
+    for(j = 0; j<7; j++) {
+      cbox = document.getElementById("row" + current_row + "column" + j)
+      cbox.innerHTML = "";
+    }
+    for(i = 0; i<rows[current_row].length; i++) {
+      cbox = document.getElementById("row" + current_row + "column" + i)
+      cbox.innerHTML = rows[current_row][i].toUpperCase();
+    }
+      
+    console.log(rows[current_row].length)
+  })
+
+  
+  //makes grid
+  cont = document.getElementById("container");
+  for(c = 0; c<6; c++) {
+    cr = document.createElement('div');
+    cr.setAttribute('class', 'row');
+    for(r = 0; r<7; r++) {
+      cb = document.createElement('div');
+      cb.setAttribute('class', 'box');
+      cb.setAttribute('id', "row" + c + "column" + r);
+      cr.appendChild(cb);
+    }
+    cont.appendChild(cr);
+  }
+}
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
